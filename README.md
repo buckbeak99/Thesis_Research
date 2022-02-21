@@ -1,88 +1,58 @@
-# Hyperledger Indy, Aries, Ursa Agent Demonstration
+# Self Sovereign Identity Management System
 
-This folder contains a demonstration of basic Hyperledger Indy and Aries Agents, which are built on the Ursa project. The agents provide a web browser interface to show establishing relationships between agents, issuing verifiable credentials, and proving claims from verifiable credentials.
+This folder contains a demonstration of basic Self Sovereign Identity Management System project. The agents provide a web browser interface to show establishing relationships between agents, issuing verifiable credentials, and proving claims from verifiable credentials.
 
-> **This demonstration is based on some early Indy agent code that should *NOT* be used as the basis of new implementations or as a reference for implementing an agent. Since this demonstration was developed the Indy (and Aries) community has evolved the notion of Agents significantly and this code base has been abandoned. It is still a good demo for understanding how agents work on a superficial level&mdash;the concepts of agents connecting and exchanging credentials. However, if you are interested in building on the latest Indy/Aries code, you should look at the [Aries project](https://github.com/hyperledger/aries), the [Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python) and other interoperable components. If you are a developer (or wannabe), check out this [Becoming an Indy/Aries Developer](https://github.com/hyperledger/aries-cloudagent-python/tree/master/docs/GettingStartedAriesDev) guide.**
+## Motivation
+In this thesis, we examine various types of identity management systems in order to strengthen the security of online platforms that users and organizations frequently use to exchange secrets and valuable digital credentials. We propose an identity system that makes use of secure tools for exchanging credentials in situations where the user lacks trust in one or more organizations. We developed the SSI system in collaboration with ***Hyperledger Indy***, ***Solid***, and ***Blockchain*** during this research.
 
-- To learn more about Hyperledger Indy, see the [Indy project wiki](https://wiki.hyperledger.org/display/indy).
-- To learn more about Hyperledger Aries, see the [Aries project wiki](https://wiki.hyperledger.org/display/aries).
-- To learn more about Hyperledger Ursa, see the [Ursa project wiki](https://wiki.hyperledger.org/display/ursa)
+### Used Tools and version
+![Nodejs](https://img.shields.io/badge/Nodejs-14.x-red)
+![Docker](https://img.shields.io/badge/Docker-latest-brightgreen)
+![VisualStudioCode](https://img.shields.io/badge/VSCode-latest-orange)
 
-This demo is used as a demonstration for those taking the Linux Foundations's edX LF172x course, *Introduction to Hyperledger Sovereign Identity Blockchain Solutions: Indy, Aries and Ursa*.
-
-[Click here](https://youtu.be/5EA-jqkvn4I) to view a short screencast of the demo.
-
-## Prerequisites
-
-The only prequisite (other than a browser) is an account with [Docker Hub](https://hub.docker.com). Docker Hub is the "Play Store" for the [Docker](https://docker.com) ecosystem.
-
-## Installing the Demonstration
-
-Go to the [Play with Docker](https://labs.play-with-docker.com/) and (if necessary) login. This site is operated by Docker to support developers learning about Docker.
-
-> If you want to learn more about the `Play with Docker` environment, look at the [About](https://training.play-with-docker.com/about/) and the Docker related tutorials at the Docker Labs [Training Site](https://training.play-with-docker.com).
-
-Click the "Start" button to start a Docker sandbox you can use to run the demo, and then click the `+Add an Instance` link to start a terminal in your browser. Within the terminal that is visible in your browser, run the following commands:
-
-``` bash
-git clone https://github.com/cloudcompass/ToIPLabs
-cd ToIPLabs/src/indy-material/nodejs
-
+### Installation and Demonstration
+1. Go to [Solid Community](https://solidcommunity.net/) to create a solid ID.
+2. Clone this project in your device.
+```bash
+   git clone https://github.com/buckbeak99/Thesis_Research.git
+   cd Thesis_Research
 ```
+3. Go to your editor and open editor terminal. Then run command:
+``` bash
+    ./startIndy.sh
+```
+4. Go to your brower and start the web server
+- `localhost:3000` - Alice
+- `localhost:3001` - Bob
+- `localhost:3002` - Faber College
+- `localhost:3003` - Acme Corporation
+- `localhost:3004` - Thrift Bank
+- `localhost:9000` - BCSovrin Indy Node Pool
+5. Use your solid community username and password for SSI login ( right now it's only applicable for alice or bob)
 
-> **Tip**: To paste text in the terminal window, right-click on the window and choose `paste`
-
-## Starting the Demonstration
-
-The steps for running the demonstration are:
-
-- Run the command `./manage build` to build the components of the software
-- Run the command `./manage up` to run the components
-
-It takes a while for the demo to start&mdash;lots of things are happening. The logs for all of the containers will display in the terminal window. Logs show the output of both the Blockchain Ledger nodes communicating and the Indy agents starting up and communicating with the ledger.
-
-Things to watch for as the demo starts up:
-
-- You should periodically see things like "Listening on port 3001," which indicates an Agent is up and running.
-- You should **not** see a stack trace error in the code&mdash;that would indicate a problem.
-- You should **not** see any "Container exiting" messages, indicating containers not starting up properly.
-- There should be 10 docker containers running. You can hit `ctrl-c` to exit the log viewer and run the command `docker ps` to see all of the containers running.
-  - To get back to seeing the scrolling logs, run `./manage logs`.
-- Once the output slows significantly and you only see messages from the nodes (the containers running the ledger), everything should be working.
-
-### Accessing the ledger and agents in a web browser:
-
-As the demo starts up, a series of four digit numbers will appear above the terminal. Those are the exposed ports of the running containers and the numbers are links to start a browser tab accessing that port.
-
-To go through the demonstration, click the following numbers from the list:
-
-- **3000** for Alice
-- **3002** for Faber College
-- **3003** for Acme Corporation
-
-If you click the links before the agent is active, you might get a `Connection reset by peer` error messages. Monitor the logs and wait longer and then try again.
-
-The instructions for walking through the demonstration script are here: [Agent Demo Script](AgentDemoScript.md).
-
-You can also open the Blockchain Ledger Explorer:
-
-- **9000** for the Ledger Explorer
-
-Although we don't talk about them in the demo overview, there are two additional agents running that you can access:
-
-- **3001** for Bob
-- **3004** for Thrift Bank
-
-> The remainder of the numbers, (ports 9701-9708) are the ports to the Blockchain Ledger nodes, two per node.
-
-## Stopping the Demo
-
-To stop the demo, go to the browser tab where you ran `docker-compose up`, click the red `Close Session` button on the left and close the browser tab. Note that if you don't close the session or the tab, the terminal session will expire 4 hours after you started it.
-
-## Running the Demo on Your Own Machine
-
-If you'd like to run the demo locally, on your own machine, see the instructions [here](RunningLocally.md).
-
-## Credits
-
-The code for this demonstration was initially written by Spencer Holman and Matthew Hailstone of Brigham Young University. Carol Howard created the documentation for the demonstration.
+### Screenshots
+![AcceptPR](https://user-images.githubusercontent.com/43216053/154916644-387b368c-e988-4cd3-b489-b894af3f612b.png)
+![AgentDID](https://user-images.githubusercontent.com/43216053/154916743-dde1be05-e4b0-40c5-ac5d-5f7fc77e42d7.png)
+![AgentScreen](https://user-images.githubusercontent.com/43216053/154916762-06d4f5e9-cc4a-4ef3-88f3-2c57edda006d.png)
+![AliceTranscriptCred](https://user-images.githubusercontent.com/43216053/154916791-bf670668-ba11-452e-b30b-87666f90997b.png)
+![BrowserTabs](https://user-images.githubusercontent.com/43216053/154916837-f2496ef0-257e-4774-8d73-410f8727d152.png)
+![CreateCredDef](https://user-images.githubusercontent.com/43216053/154916866-d5945234-1064-488e-b75a-40315242748d.png)
+![CreateRelBlank](https://user-images.githubusercontent.com/43216053/154916895-9859f2e5-c087-4fe3-80e3-083622477788.png)
+![CreateRelFill](https://user-images.githubusercontent.com/43216053/154916916-8015a8a6-f625-48d6-899d-b10f74b1c5e8.png)
+![CreateRelFill2](https://user-images.githubusercontent.com/43216053/154916937-cbb24363-f3f0-4c41-aa6f-db3e66de4797.png)
+![CreateSchema](https://user-images.githubusercontent.com/43216053/154917029-85994f75-eea9-47d3-88c9-2974be51b13f.png)
+![CredOffer](https://user-images.githubusercontent.com/43216053/154917043-d6c33e08-3331-4210-8d74-4cf9a7c615f4.png)
+![CredOfferTran](https://user-images.githubusercontent.com/43216053/154917064-e742b793-9b55-49db-bb18-acdcc259a275.png)
+![Creds](https://user-images.githubusercontent.com/43216053/154917080-93b8aa45-7efa-4ce5-b5f1-e640bba327f1.png)
+![DelAgentDIDRels](https://user-images.githubusercontent.com/43216053/154917090-13df26d7-d169-436c-9670-17acacfa10bf.png)
+![DID](https://user-images.githubusercontent.com/43216053/154917108-ded1d44c-edf6-48c9-b12e-06cb22f3620e.png)
+![FaberRelAlice](https://user-images.githubusercontent.com/43216053/154917119-714cd748-f345-4b69-8c95-7dcffd0f1c28.png)
+![FIXAcceptNamePR](https://user-images.githubusercontent.com/43216053/154917130-0f689240-e8bd-4868-afac-b1dfbc075639.png)
+![NamePR](https://user-images.githubusercontent.com/43216053/154917140-2fd49290-8f0d-4e3a-b82a-3b774f476f59.png)
+![NamePRNotes](https://user-images.githubusercontent.com/43216053/154917152-04bc4bbd-12d6-46bf-ae17-70967224cc47.png)
+![PastePR](https://user-images.githubusercontent.com/43216053/154917166-a1240141-d1b2-46cb-a60c-75052b2ac790.png)
+![ProofReqOther](https://user-images.githubusercontent.com/43216053/154917183-14a8faa3-5f62-4068-aad3-c04d49c829e2.png)
+![ProofRequest](https://user-images.githubusercontent.com/43216053/154917194-7f8ad3b0-b251-4692-840f-99de91a35cee.png)
+![RelationshipWindow](https://user-images.githubusercontent.com/43216053/154917202-308f149f-0cee-4017-8550-b32ef93046c9.png)
+![RelDIDs](https://user-images.githubusercontent.com/43216053/154917210-2bf60576-f34c-4d70-b37e-c350dc3ac3a8.png)
+![TranscriptProof](https://user-images.githubusercontent.com/43216053/154917222-3a4b2b5a-2d89-4f2f-8000-76e380d5709a.png)
